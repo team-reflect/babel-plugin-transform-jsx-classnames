@@ -8,11 +8,11 @@ className and styleName on steroids 💪
 
 ## Usage
 
-Allow you to write jsx classNames in a simpler way, without having to worry about importing a helper (like [classnames](https://www.npmjs.com/package/classnames)). `className` or `styleName` attributes take any number of arguments which can be a string, an array or an object (if the value associated with a given key is falsy, that key won't be included in the output). [See examples](#examples)
+Allow you to write jsx classNamess in a simpler way, without having to worry about importing a helper (like [classnames](https://www.npmjs.com/package/classnames)). `classNames` or `styleNames` attributes take any number of arguments which can be a string, an array or an object (if the value associated with a given key is falsy, that key won't be included in the output). [See examples](#examples)
 
 ## Install
 
-When babel-plugin-transform-jsx-classnames cannot resolve `className` / `styleName` during compilation, it imports a helper function (read [build time resolution](#build-time-resolution)). Therefore, you must install babel-plugin-react-css-modules as a direct dependency of the project.
+When babel-plugin-transform-jsx-classnames cannot resolve `classNames` / `styleNames` during compilation, it imports a helper function (read [build time resolution](#build-time-resolution)). Therefore, you must install babel-plugin-react-css-modules as a direct dependency of the project.
 
 ```bash
 $ npm install babel-plugin-transform-jsx-classnames --save
@@ -30,13 +30,13 @@ Add to `.babelrc`:
 
 ## Build time resolution
 
-The plugin will try to resolve the `className` / `styleName` during the compilation (`className={"foo", { active: true }}`) and fallback to runtime if not possible (`className={_cx("foo", { active: props.active })}` - a tiny helper (~0.3Ko) will be included automatically.
+The plugin will try to resolve the `classNames` / `styleNames` during the compilation (`classNames={"foo", { active: true }}`) and fallback to runtime if not possible (`classNames={_cx("foo", { active: props.active })}` - a tiny helper (~0.3Ko) will be included automatically.
 
 ## Runtime helper
 
 The runtime helper is very similar to the [classnames](https://www.npmjs.com/package/classnames) package. It actually behaves like its [dedupe](https://www.npmjs.com/package/classnames#alternate-dedupe-version) version.
 
-The only difference you'll find will be with full numeric classNames: output will always spit numbers first (ex: `className={"a", 12}` => `className="12 a"`). It shouldn't be a big deal though, as using numeric values for classNames is pretty rare and order only matters in a very few specific cases.
+The only difference you'll find will be with full numeric classNamess: output will always spit numbers first (ex: `classNames={"a", 12}` => `classNames="12 a"`). It shouldn't be a big deal though, as using numeric values for classNamess is pretty rare and order only matters in a very few specific cases.
 
 ## Performance & dedupe
 
@@ -47,50 +47,50 @@ Dedupe has been optimized a lot and its performance is very similar to [classnam
 ### Build time
 
 ```html
-<div className={"foo", "bar"}>
-→ <div className="foo bar"></div>
+<div classNames={"foo", "bar"}>
+→ <div classNames="foo bar"></div>
 
-<div className={'foo', { bar: true }}>
-→ <div className="foo bar"></div>
+<div classNames={'foo', { bar: true }}>
+→ <div classNames="foo bar"></div>
 
-<div className={{ 'foo-bar': true }}>
-→ <div className="foo-bar"></div>
+<div classNames={{ 'foo-bar': true }}>
+→ <div classNames="foo-bar"></div>
 
-<div className={{ 'foo-bar': false }}>
-→ <div className=""></div>
+<div classNames={{ 'foo-bar': false }}>
+→ <div classNames=""></div>
 
-<div className={{ foo: true }, { bar: true }, ["foobar", "duck"]}>
-→ <div className="foo bar foobar duck"></div>
+<div classNames={{ foo: true }, { bar: true }, ["foobar", "duck"]}>
+→ <div classNames="foo bar foobar duck"></div>
 
-<div className={'foo', { bar: true, duck: false }, 'baz', { quux: true }}>
-→ <div className="foo bar baz quux"></div>
+<div classNames={'foo', { bar: true, duck: false }, 'baz', { quux: true }}>
+→ <div classNames="foo bar baz quux"></div>
 
-<!-- styleName -->
-<div styleName={"foo", "bar"}>
-→ <div styleName="foo bar"></div>
+<!-- styleNames -->
+<div styleNames={"foo", "bar"}>
+→ <div styleNames="foo bar"></div>
 
 <!-- Dedupe -->
-<div className={'foo foo', 'bar', { bar: true, foo: false }}>
-→ <div className="bar"></div>
+<div classNames={'foo foo', 'bar', { bar: true, foo: false }}>
+→ <div classNames="bar"></div>
 
 <!-- No change -->
-<div className={props.active ? "foo" : "bar"}>
-→ <div className={props.active ? "foo" : "bar"}></div>
+<div classNames={props.active ? "foo" : "bar"}>
+→ <div classNames={props.active ? "foo" : "bar"}></div>
 ```
 
 ### Runtime
 
-When `className` / `styleName` can't be resolved at compilation.
+When `classNames` / `styleNames` can't be resolved at compilation.
 
 ```js
-<div className={"foo", { active: props.active }}>
-→ <div className={_cx("foo", { active: props.active })}></div>
+<div classNames={"foo", { active: props.active }}>
+→ <div classNames={_cx("foo", { active: props.active })}></div>
 
-<div className={{ foo: true, [`btn-${props.type}`]: true }}>
-→ <div className={_cx({ foo: true, [`btn-${props.type}`]: true })}></div>
+<div classNames={{ foo: true, [`btn-${props.type}`]: true }}>
+→ <div classNames={_cx({ foo: true, [`btn-${props.type}`]: true })}></div>
 
-<div className={"foo", props.active && getClassName()}>
-→ <div className={_cx("foo", props.active && getClassName())}></div>
+<div classNames={"foo", props.active && getClassName()}>
+→ <div classNames={_cx("foo", props.active && getClassName())}></div>
 ```
 
 ## Send some love
