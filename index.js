@@ -2,7 +2,7 @@ const _cx = require('./cx')
 
 const PRIMITIVE_TYPES = ['NullLiteral', 'BooleanLiteral', 'NumericLiteral', 'StringLiteral']
 const SIMPLE_PROP_KEY_TYPES = ['Identifier', 'StringLiteral']
-const DIRECTIVES = ['classNames']
+const DIRECTIVES = ['classNames', 'styleNames']
 
 module.exports = function (base) {
   const t = base.types
