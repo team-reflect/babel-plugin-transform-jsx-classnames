@@ -1,5 +1,5 @@
 {
-  "name": "babel-plugin-transform-jsx-classnames",
+  "name": "@maccman/babel-plugin-transform-jsx-classnames",
   "version": "1.1.1",
   "description": "className and styleName on steroids",
   "main": "index.js",
