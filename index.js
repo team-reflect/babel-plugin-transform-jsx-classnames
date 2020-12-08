@@ -2,6 +2,7 @@ const _cx = require('./cx')
 
 const PRIMITIVE_TYPES = ['NullLiteral', 'BooleanLiteral', 'NumericLiteral', 'StringLiteral']
 const SIMPLE_PROP_KEY_TYPES = ['Identifier', 'StringLiteral']
+const DIRECTIVES = ['classNames']
 
 module.exports = function (base) {
   const t = base.types
@@ -139,7 +140,7 @@ module.exports = function (base) {
 
   const readAttributes = (path) => {
     const info = {}
-    ;['className', 'styleName'].forEach((prop) => {
+    ;DIRECTIVES.forEach((prop) => {
       const paths = []
       let attrs = []
 

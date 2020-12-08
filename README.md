@@ -18,6 +18,8 @@ When babel-plugin-transform-jsx-classnames cannot resolve `className` / `styleNa
 $ npm install babel-plugin-transform-jsx-classnames --save
 ```
 
+Add to `.babelrc`:
+
 ```js
 {
   plugins: ['transform-jsx-classnames']
